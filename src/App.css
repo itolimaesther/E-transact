@@ -1,8 +1,112 @@
-.App {
-  text-align: center;
+
+body{
+  margin: 0;
+  width: 100%;
+  padding: 0;
 }
 
-.App-logo {
+
+.App-header {
+  text-align: center;
+  background: linear-gradient(-259deg,#5E60E7 0,#9C7AF2 65%);
+  height: 80px;
+}
+.search-outer .searchform {
+  display: block;
+  position: relative;
+  left: 0;
+  right: 0;
+}
+.search-outer .searchform input {
+  outline: medium none;
+}
+.search-outer .searchform input[type=search] {
+  background-color: transparent;
+  border: medium none;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #dadbdb;
+  border-radius: 0;
+  box-sizing: content-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 100%;
+  margin-bottom: 0;
+  margin-top: 20px;
+  padding: 3px 0;
+  transition: all 0.5s ease 0s;
+  max-width: 300px;
+  width: calc(100% - 0px);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.search-outer .searchform input[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+.search-outer .searchform input[type=search]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.search-outer .searchform input[type=search]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.search-outer .searchform input[type=search]::-webkit-search-decoration, .search-outer .searchform input[type=search]::-webkit-search-cancel-button, .search-outer .searchform input[type=search]::-webkit-search-results-button, .search-outer .searchform input[type=search]::-webkit-search-results-decoration {
+  display: none;
+}
+.search-outer .searchform input[type=search]:focus {
+  background-color: transparent;
+  color: #fff;
+  cursor: auto;
+  padding: 3px 0;
+}
+.search-outer .searchform:hover input[type=search] {
+  background-color: transparent;
+  color: #ffffff;
+  cursor: auto;
+  padding: 3px 0;
+}
+.search-outer button[type=submit] {
+  background-color: rgba(0, 0, 0, 0);
+  border: medium none;
+  color: #fff;
+  cursor: pointer;
+  height: 30px;
+  line-height: 1;
+  font-size: 1em;
+  pointer-events: none;
+  width: auto;
+  z-index: 1000000000;
+}
+.search-outer .fa-search {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: rgba(231, 231, 231, 0.89);
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: rgba(231, 231, 231, 0.89);
+}
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: rgba(231, 231, 231, 0.89);
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: rgba(231, 231, 231, 0.89);
+}
+
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -11,9 +115,9 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -35,4 +139,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
