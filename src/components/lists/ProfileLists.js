@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import TableHeader from "./TableHeader";
 import Search from "../search/Search";
 import Pagination from "../pagination/Pagination";
+import Genderfilter from "../filter/GenderFilter"
 
 function ProfileLists() {
   const [lists, setLists] = useState([]);
@@ -34,7 +35,6 @@ function ProfileLists() {
       const response = await fetch(url);
       const data = await response.json();
       setLists(data.records.profiles);
-      // console.log(lists)
     } catch (error) {
       console.log(error);
     }
@@ -46,29 +46,34 @@ function ProfileLists() {
 
   const listsData = useMemo(() => {
     let computedLists = lists;
-    
+    console.log(computedLists.gender)
+
     if (search) {
-      computedLists = computedLists.filter(
-        (list) =>
-          list.name.toLowerCase().includes(search.toLowerCase()) ||
-          list.email.toLowerCase().includes(search.toLowerCase())
-          );
-        }
+
+      computedLists = computedLists.filter((list) => {
+        return ( list.FirstName.toLowerCase().includes(search.toLowerCase()) ||
+          list.Email.toLowerCase().includes(search.toLowerCase())
+        )
+      })
         
-        setTotalItems(computedLists.length);
-        console.log(computedLists)
-        //Current Page slice
-        return computedLists.slice(
-          (currentPage - 1) * ITEMS_PER_PAGE,
-          (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
-          );
-        }, [lists, currentPage, search]);
-        
+      }
+      
+
+    setTotalItems(computedLists.length);
+    //Current Page slice
+    return computedLists.slice(
+      (currentPage - 1) * ITEMS_PER_PAGE,
+      (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
+    );
+  }, [lists, currentPage, search]);
 
   return (
     <div className="row w-100">
       <div className="col mb-3 col-12 text-center">
         <div className="row">
+        <div className="col-md-6 d-flex">
+            <Genderfilter  />
+          </div>
           <div className="col-md-6 d-flex flex-row-reverse">
             <Search
               onSearch={(value) => {
@@ -80,44 +85,38 @@ function ProfileLists() {
         </div>
 
         <div className="table-container">
-
-        <table className="table table-striped table-wrapper border rounded">
-          <TableHeader headers={headers} />
-          <tbody>
-            {listsData.map((list) => (
-              <tr>
-                {/* <th scope="row" key={list.id}>
-                  {list.id}
-                </th> */}
-                <td>{list.FirstName}</td>
-                <td>{list.LastName}</td>
-                <td>{list.Gender}</td>
-                <td>{list.Latitude}</td>
-                <td>{list.CreditCardNumber}</td>
-                <td>{list.CreditCardType}</td>
-                <td>{list.Email}</td>
-                <td>{list.DomainName}</td>
-                <td>{list.PhoneNumber}</td>
-                <td>{list.MacAddress}</td>
-                <td>{list.URL}</td>
-                <td>{list.UserName}</td>
-                <td>{list.LastLogin}</td>
-                <td>{list.PaymentMethod}</td>
-              </tr>
-            ))}
-          </tbody>
-
-        </table>
-          
+          <table className="table table-striped table-wrapper border rounded">
+            <TableHeader headers={headers} />
+            <tbody>
+              {listsData.map((list, i) => (
+                <tr key={i}>
+                  <td>{list.FirstName}</td>
+                  <td>{list.LastName}</td>
+                  <td>{list.Gender}</td>
+                  <td>{list.Latitude}</td>
+                  <td>{list.CreditCardNumber}</td>
+                  <td>{list.CreditCardType}</td>
+                  <td>{list.Email}</td>
+                  <td>{list.DomainName}</td>
+                  <td>{list.PhoneNumber}</td>
+                  <td>{list.MacAddress}</td>
+                  <td>{list.URL}</td>
+                  <td>{list.UserName}</td>
+                  <td>{list.LastLogin}</td>
+                  <td>{list.PaymentMethod}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-          <div className="float-right">
-            <Pagination
-              total={totalItems}
-              itemsPerPage={ITEMS_PER_PAGE}
-              currentPage={currentPage}
-              onPageChange={(page) => setCurrentPage(page)}
-            />
-          </div>
+        <div className="float-right">
+          <Pagination
+            total={totalItems}
+            itemsPerPage={ITEMS_PER_PAGE}
+            currentPage={currentPage}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        </div>
       </div>
     </div>
   );

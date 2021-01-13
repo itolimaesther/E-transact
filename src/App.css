@@ -28,7 +28,7 @@ body{
   border-color: #dadbdb;
   border-radius: 0;
   box-sizing: content-box;
-  color: #ffffff;
+  color: #000;
   cursor: pointer;
   font-family: inherit;
   font-size: 100%;
@@ -59,20 +59,20 @@ body{
 }
 .search-outer .searchform input[type=search]:focus {
   background-color: transparent;
-  color: #fff;
+  color: #000;
   cursor: auto;
   padding: 3px 0;
 }
 .search-outer .searchform:hover input[type=search] {
   background-color: transparent;
-  color: #ffffff;
+  color: #000;
   cursor: auto;
   padding: 3px 0;
 }
 .search-outer button[type=submit] {
   background-color: rgba(0, 0, 0, 0);
   border: medium none;
-  color: #fff;
+  color: #000;
   cursor: pointer;
   height: 30px;
   line-height: 1;

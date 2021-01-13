@@ -31,7 +31,6 @@ function Search({ onSearch }) {
 
         <button type="submit" id="searchsubmit">
           <FontAwesomeIcon icon={faSearch} />
-          {/* <i className="fa fa-search" aria-hidden="true" /> */}
         </button>
       </form>
     </div>
