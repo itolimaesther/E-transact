@@ -3,6 +3,8 @@ import TableHeader from "./TableHeader";
 import Search from "../search/Search";
 import Pagination from "../pagination/Pagination";
 import Genderfilter from "../filter/GenderFilter"
+import Paymentfilter from "../filter/PaymentFilter"
+
 
 function ProfileLists() {
   const [lists, setLists] = useState([]);
@@ -71,8 +73,11 @@ function ProfileLists() {
     <div className="row w-100">
       <div className="col mb-3 col-12 text-center">
         <div className="row">
-        <div className="col-md-6 d-flex">
+        <div className="col-md-3 d-flex">
             <Genderfilter  />
+          </div>
+          <div className="col-md-3 d-flex">
+            <Paymentfilter  />
           </div>
           <div className="col-md-6 d-flex flex-row-reverse">
             <Search
