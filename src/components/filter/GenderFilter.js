@@ -1,7 +1,12 @@
 import React from "react";
 
 function GenderFilter() {
-  // const [genderFilter, setGenderFilter] = useState("");
+//   const [genderFilter, setGenderFilter] = useState("");
+
+
+const selectedOptions = (value) => {
+
+}
 
   return (
     <div className="form-row">
@@ -10,9 +15,9 @@ function GenderFilter() {
           className="form-control"
           name=""
         >
-          <option selected>filter by gender</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
+          <option defaultValue>filter by gender</option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
         </select>
       </div>
     </div>

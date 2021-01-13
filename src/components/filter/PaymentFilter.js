@@ -9,10 +9,11 @@ function PaymentFilter() {
           className="form-control"
           name=""
         >
-          <option selected>filter by paymethod</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <option defaultValue>filter by paymethod</option>
+          <option value="1">money order</option>
+          <option value="2">cc</option>
+          <option value="3">check</option>
+          <option value="4">paypal</option>
         </select>
       </div>
     </div>

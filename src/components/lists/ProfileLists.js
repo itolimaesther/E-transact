@@ -1,18 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React from "react";
 import TableHeader from "./TableHeader";
-import Search from "../search/Search";
-import Pagination from "../pagination/Pagination";
-import Genderfilter from "../filter/GenderFilter"
-import Paymentfilter from "../filter/PaymentFilter"
 
 
-function ProfileLists() {
-  const [lists, setLists] = useState([]);
-  const [totalItems, setTotalItems] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
 
-  const ITEMS_PER_PAGE = 20;
+function ProfileLists(listsData) {
+  
 
   const headers = [
     { name: "First Name", field: "firstname" },
@@ -31,63 +23,10 @@ function ProfileLists() {
     { name: "Payment Method", field: "paymethod" },
   ];
 
-  const fetchData = async () => {
-    const url = "http://api.enye.tech/v1/challenge/records";
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setLists(data.records.profiles);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const listsData = useMemo(() => {
-    let computedLists = lists;
-    console.log(computedLists.gender)
-
-    if (search) {
-
-      computedLists = computedLists.filter((list) => {
-        return ( list.FirstName.toLowerCase().includes(search.toLowerCase()) ||
-          list.Email.toLowerCase().includes(search.toLowerCase())
-        )
-      })
-        
-      }
-      
-
-    setTotalItems(computedLists.length);
-    //Current Page slice
-    return computedLists.slice(
-      (currentPage - 1) * ITEMS_PER_PAGE,
-      (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
-    );
-  }, [lists, currentPage, search]);
 
   return (
     <div className="row w-100">
       <div className="col mb-3 col-12 text-center">
-        <div className="row">
-        <div className="col-md-3 d-flex">
-            <Genderfilter  />
-          </div>
-          <div className="col-md-3 d-flex">
-            <Paymentfilter  />
-          </div>
-          <div className="col-md-6 d-flex flex-row-reverse">
-            <Search
-              onSearch={(value) => {
-                setSearch(value);
-                setCurrentPage(1);
-              }}
-            />
-          </div>
-        </div>
 
         <div className="table-container">
           <table className="table table-striped table-wrapper border rounded">
@@ -114,14 +53,7 @@ function ProfileLists() {
             </tbody>
           </table>
         </div>
-        <div className="float-right">
-          <Pagination
-            total={totalItems}
-            itemsPerPage={ITEMS_PER_PAGE}
-            currentPage={currentPage}
-            onPageChange={(page) => setCurrentPage(page)}
-          />
-        </div>
+        
       </div>
     </div>
   );
