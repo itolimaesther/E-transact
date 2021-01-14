@@ -24,7 +24,7 @@ function Search({ onSearch }) {
           type="search"
           name="search"
           id="search"
-          placeholder="Search by firstname, lastname, and more...."
+          placeholder="Search by firstname, lastname, and email"
           value={search}
           onChange={(e) => onInputChange(e.target.value)}
         />
