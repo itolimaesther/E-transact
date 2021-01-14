@@ -20,8 +20,8 @@ function ProfileLists({ listsData }) {
   ];
 
   return (
-    <div className="row w-100">
-      <div className="col mb-3 col-12 text-center">
+    <div className=" w-100">
+      <div className=" mb-3">
         <div className="table-container">
           <table className="table table-striped table-wrapper border rounded">
             <TableHeader headers={headers} />

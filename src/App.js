@@ -94,8 +94,8 @@ function App() {
         />
       </header>
 
-      <div className="row w-100">
-        <div className="col mb-3 col-12 text-center">
+      <div className="row w-100 mx-0">
+        <div className="mb-3 col-12">
           <div className="filter-wrapper">
             <div className="gender">
               <Genderfilter setGender={setGender} />
