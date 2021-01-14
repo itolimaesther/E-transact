@@ -1,11 +1,7 @@
 import React from "react";
 import TableHeader from "./TableHeader";
 
-
-
-function ProfileLists(listsData) {
-  
-
+function ProfileLists({ listsData }) {
   const headers = [
     { name: "First Name", field: "firstname" },
     { name: "Last Name", field: "lastname" },
@@ -23,11 +19,9 @@ function ProfileLists(listsData) {
     { name: "Payment Method", field: "paymethod" },
   ];
 
-
   return (
     <div className="row w-100">
       <div className="col mb-3 col-12 text-center">
-
         <div className="table-container">
           <table className="table table-striped table-wrapper border rounded">
             <TableHeader headers={headers} />
@@ -53,7 +47,6 @@ function ProfileLists(listsData) {
             </tbody>
           </table>
         </div>
-        
       </div>
     </div>
   );

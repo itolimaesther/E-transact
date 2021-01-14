@@ -1,23 +1,18 @@
 import React from "react";
 
-function GenderFilter() {
-//   const [genderFilter, setGenderFilter] = useState("");
-
-
-const selectedOptions = (value) => {
-
-}
-
+function GenderFilter({ setGender }) {
   return (
     <div className="form-row">
       <div className="form-group">
         <select
           className="form-control"
-          name=""
+          name="gender"
+          onChange={(e) => setGender(e.target.value)}
         >
-          <option defaultValue>filter by gender</option>
-          <option value="female">Female</option>
-          <option value="male">Male</option>
+          <option value="">Filter by gender</option>
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Prefer to skip">Undisclosed</option>
         </select>
       </div>
     </div>

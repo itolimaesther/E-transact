@@ -4,20 +4,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ProfileLists from "./components/lists/ProfileLists";
 import Search from "./components/search/Search";
 import Pagination from "./components/pagination/Pagination";
-import Genderfilter from "./components/filter/GenderFilter"
-import Paymentfilter from "./components/filter/PaymentFilter"
-
+import Genderfilter from "./components/filter/GenderFilter";
+import Paymentfilter from "./components/filter/PaymentFilter";
 
 function App() {
-
   const [lists, setLists] = useState([]);
+  const [filteredList, setfilteredList] = useState([...lists]);
+  const [currentPageList, setcurrentPageList] = useState([...lists]);
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [appFilters, setAppFilters] = useState({
-    gender:'',
-    payment:''
-  });
+  const [gender, setGender] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const ITEMS_PER_PAGE = 20;
 
@@ -26,7 +24,9 @@ function App() {
     try {
       const response = await fetch(url);
       const data = await response.json();
+      console.log(data.records.profiles);
       setLists(data.records.profiles);
+      setfilteredList(data.records.profiles);
     } catch (error) {
       console.log(error);
     }
@@ -36,66 +36,87 @@ function App() {
     fetchData();
   }, []);
 
-  const listsData = useMemo(() => {
-
-    const computedList = lists.filter(list => {
-
-      return search ?  list.FirstName.toLowerCase().includes(search.toLowerCase()) ||
-      list.Email.toLowerCase().includes(search.toLowerCase()) : true
-  
-    } ).filter(list => {
-      appFilters.gender ?  list.gender.includes(appFilters.gender) : true 
-    }).filter(list => appFilters.payment ? list.payment.includes(appFilters.payment):true)
-
-  
-      
-
-    setTotalItems(computedLists.length);
+  useMemo(() => {
+    setTotalItems(filteredList.length);
+    console.log(filteredList.length);
     //Current Page slice
-    return computedLists.slice(
+    const paginatedList = filteredList.slice(
       (currentPage - 1) * ITEMS_PER_PAGE,
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
     );
+    setcurrentPageList(paginatedList);
+  }, [filteredList]);
 
-    
+  const filterAll = () => {
+    let filteredBySearch;
+    let filteredByPayment;
+    let filteredByGender;
+    if (search === "") {
+      filteredBySearch = lists;
+    } else {
+      filteredBySearch = lists.filter(
+        (list) =>
+          list.FirstName.toLowerCase().includes(search.toLowerCase()) ||
+          list.LastName.toLowerCase().includes(search.toLowerCase()) ||
+          list.Email.toLowerCase().includes(search.toLowerCase())
+      );
+    }
 
-  }, [lists, currentPage, search]);
+    if (paymentMethod === "") {
+      filteredByPayment = filteredBySearch;
+    } else {
+      filteredByPayment = filteredBySearch.filter(
+        (item) => item.PaymentMethod === paymentMethod
+      );
+    }
+
+    if (gender === "") {
+      filteredByGender = filteredByPayment;
+    } else {
+      filteredByGender = filteredByPayment.filter(
+        (item) => item.Gender === gender
+      );
+    }
+
+    setfilteredList(filteredByGender);
+  };
+
+  useMemo(() => filterAll(), [search, paymentMethod, gender]);
 
   return (
     <div className="App">
-      <header className="App-header">{/* <Search /> */}</header>
+      <header className="App-header">
+        <Search
+          onSearch={(value) => {
+            setSearch(value);
+            setCurrentPage(1);
+          }}
+        />
+      </header>
 
       <div className="row w-100">
-      <div className="col mb-3 col-12 text-center">
-        <div className="row">
-        <div className="col-md-3 d-flex">
-            <Genderfilter  />
+        <div className="col mb-3 col-12 text-center">
+          <div className="filter-wrapper">
+            <div className="gender">
+              <Genderfilter setGender={setGender} />
+            </div>
+            <div className="payment">
+              <Paymentfilter setPaymentMethod={setPaymentMethod} />
+            </div>
           </div>
-          <div className="col-md-3 d-flex">
-            <Paymentfilter  />
-          </div>
-          <div className="col-md-6 d-flex flex-row-reverse">
-            <Search
-              onSearch={(value) => {
-                setSearch(value);
-                setCurrentPage(1);
-              }}
+
+          <ProfileLists listsData={currentPageList} />
+
+          <div className="float-right">
+            <Pagination
+              total={totalItems}
+              itemsPerPage={ITEMS_PER_PAGE}
+              currentPage={currentPage}
+              onPageChange={(page) => setCurrentPage(page)}
             />
           </div>
         </div>
-
-          <ProfileLists />
-        
-        <div className="float-right">
-          <Pagination
-            total={totalItems}
-            itemsPerPage={ITEMS_PER_PAGE}
-            currentPage={currentPage}
-            onPageChange={(page) => setCurrentPage(page)}
-          />
-        </div>
       </div>
-    </div>
     </div>
   );
 }

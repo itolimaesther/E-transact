@@ -1,19 +1,19 @@
 import React from "react";
 
-function PaymentFilter() {
-
+function PaymentFilter({ setPaymentMethod }) {
   return (
     <div className="form-row">
       <div className="form-group">
         <select
           className="form-control"
-          name=""
+          name="paymentMethod"
+          onChange={(e) => setPaymentMethod(e.target.value)}
         >
-          <option defaultValue>filter by paymethod</option>
-          <option value="1">money order</option>
-          <option value="2">cc</option>
-          <option value="3">check</option>
-          <option value="4">paypal</option>
+          <option value="">Filter by paymethod</option>
+          <option value="money order">money order</option>
+          <option value="cc">cc</option>
+          <option value="check">check</option>
+          <option value="paypal">paypal</option>
         </select>
       </div>
     </div>

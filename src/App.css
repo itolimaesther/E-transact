@@ -5,7 +5,6 @@ body{
   padding: 0;
 }
 
-
 .App-header {
   text-align: center;
   background: linear-gradient(-259deg,#5E60E7 0,#9C7AF2 65%);
@@ -104,6 +103,16 @@ body{
 :-moz-placeholder {
   /* Firefox 18- */
   color: rgba(231, 231, 231, 0.89);
+}
+
+.filter-wrapper{
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
+
+.gender, .payment{
+  margin-right: 18px;
 }
 
 .table-wrapper{
