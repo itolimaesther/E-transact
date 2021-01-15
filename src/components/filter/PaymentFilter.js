@@ -9,7 +9,7 @@ function PaymentFilter({ setPaymentMethod }) {
           name="paymentMethod"
           onChange={(e) => setPaymentMethod(e.target.value)}
         >
-          <option value="">Filter by paymethod</option>
+          <option value="">filter by payment method</option>
           <option value="money order">money order</option>
           <option value="cc">cc</option>
           <option value="check">check</option>
