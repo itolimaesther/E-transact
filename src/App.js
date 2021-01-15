@@ -45,7 +45,7 @@ function App() {
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
     );
     setcurrentPageList(paginatedList);
-  }, [filteredList]);
+  }, [filteredList, currentPage]);
 
   const filterAll = () => {
     let filteredBySearch;
