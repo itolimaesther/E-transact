@@ -20,7 +20,7 @@ function App() {
   const ITEMS_PER_PAGE = 20;
 
   const fetchData = async () => {
-    const url = "https://api.enye.tech/v1/challenge/records";
+    const url = "https://cors-anywhere.herokuapp.com/https://api.enye.tech/v1/challenge/records";
     try {
       const response = await fetch(url);
       const data = await response.json();
